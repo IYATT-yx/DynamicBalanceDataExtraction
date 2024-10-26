@@ -1,7 +1,7 @@
 """
 author: IYATT-yx
 date: 20241026
-version: 0.0.2
+version: 0.0.1
 """
 import tkinter as tk
 from tkinter import simpledialog, filedialog, messagebox
