@@ -1,7 +1,6 @@
 """
 author: IYATT-yx
-date: 20241026
-version: 0.0.1
+version: 0.0.2
 """
 import tkinter as tk
 from tkinter import simpledialog, filedialog, messagebox
@@ -38,15 +37,15 @@ delimiter = ','
 def splitData(lineString: str):
     parts = lineString.split(delimiter)
     data = []
-    data.append(parts[0][5:]) # 工件序号
-    data.append(parts[1][4:]) # 扫码编号
-    data.append(parts[2]) # 日期
-    data.append(parts[3]) # 时间
-    data.append(parts[5][1:]) # 初测值
-    data.append(parts[7]) # 粗测相位
-    data.append(parts[9][1:]) # 剩余值
-    data.append(parts[11]) # 剩余相位
-    data.append(parts[12][5:]) # 产品情况
+    data.append(parts[0].strip()[5:].strip()) # 工件序号
+    data.append(parts[1].strip()[4:].strip()) # 扫码编号
+    data.append(parts[2].strip()) # 日期
+    data.append(parts[3].strip()) # 时间
+    data.append(parts[5].strip()) # 初测值
+    data.append(parts[7].strip()) # 粗测相位
+    data.append(parts[9].strip()) # 剩余值
+    data.append(parts[11].strip()) # 剩余相位
+    data.append(parts[12].strip()[5:]) # 产品情况
     return data
 
 def main():
