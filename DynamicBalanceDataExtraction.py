@@ -35,17 +35,22 @@ def user_input():
 delimiter = ','
 
 def splitData(lineString: str):
-    parts = lineString.split(delimiter)
+    parts = lineString.strip().split(delimiter)
+    if len(parts) < 13:
+        # 如果字段数量不足，返回空列表或打印警告
+        print(f"跳过格式错误的行: {lineString}")
+        return None
+
     data = []
-    data.append(parts[0].strip()[5:].strip()) # 工件序号
-    data.append(parts[1].strip()[4:].strip()) # 扫码编号
-    data.append(parts[2].strip()) # 日期
-    data.append(parts[3].strip()) # 时间
-    data.append(parts[5].strip()) # 初测值
-    data.append(parts[7].strip()) # 粗测相位
-    data.append(parts[9].strip()) # 剩余值
-    data.append(parts[11].strip()) # 剩余相位
-    data.append(parts[12].strip()[5:]) # 产品情况
+    data.append(parts[0].strip()[5:].strip())  # 工件序号
+    data.append(parts[1].strip()[4:].strip())  # 扫码编号
+    data.append(parts[2].strip())              # 日期
+    data.append(parts[3].strip())              # 时间
+    data.append(parts[5].strip())              # 初测值
+    data.append(parts[7].strip())              # 粗测相位
+    data.append(parts[9].strip())              # 剩余值
+    data.append(parts[11].strip())             # 剩余相位
+    data.append(parts[12].strip()[5:])         # 产品情况
     return data
 
 def main():
@@ -61,13 +66,15 @@ def main():
                 while True:
                     line = rf.readline()
                     if not line:
-                        break
+                        break 
                     
                     # 如果有关键词就筛选
                     if keyword and line.find(keyword) == -1:
                         continue
 
                     data = splitData(line)
+                    if data is None:
+                        continue
                     print(data)
                     wf.write(','.join(data) + '\n')
     print(f'写入文件{outputFilename}')
